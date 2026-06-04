@@ -125,6 +125,16 @@ class TestReportModelsConsistency:
                 },
                 "web.config :: configuration/system.webServer/security",
             ),
+            (
+                {
+                    "mode": "local",
+                    "kind": "xml",
+                    "file_path": "web.config",
+                    "line": 42,
+                    "xml_path": "configuration/system.webServer/security",
+                },
+                "web.config:42 :: configuration/system.webServer/security",
+            ),
             ({"mode": "external", "kind": "header", "target": "https://x/"}, "https://x/"),
             ({"mode": "local", "kind": "xml", "xml_path": "/config/system"}, "/config/system"),
             ({"mode": "external", "kind": "tls", "details": "TLSv1.0"}, "TLSv1.0"),
