@@ -71,7 +71,7 @@ suppressions:
     source: nginx.conf
     line: 12
     reason: Accepted for the internal staging endpoint until the shared image is rebuilt.
-    expires: 2026-05-31
+    expires: 2026-12-31
 ```
 
 Suppressed findings are removed from the active finding count and are emitted in
@@ -79,9 +79,10 @@ JSON under `suppressed_findings`.
 
 ## GitHub Actions
 
-Before the first public release tag is created, install from a reviewed branch
-or commit SHA. After a release is tagged, replace `<ref>` with the release tag
-such as `v0.1.0`.
+Before the first public release tag is created, install from an immutable commit
+SHA by default. A reviewed branch is acceptable only for short-lived development
+experiments because branch refs can move. After a release is tagged, replace
+`<ref>` with the release tag such as `v0.1.0`.
 
 ```yaml
 name: webconf-audit

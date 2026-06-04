@@ -109,7 +109,7 @@ suppressions:
     source: nginx.conf
     line: 12
     reason: Accepted for staging until the shared image is rebuilt.
-    expires: 2026-05-31
+    expires: 2026-12-31
 ```
 
 Use `--suppressions <path>` to point at a non-default suppression file. Full CI
