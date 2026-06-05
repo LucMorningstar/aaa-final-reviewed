@@ -20,6 +20,15 @@ def _document_text() -> str:
     return _DOC_PATH.read_text(encoding="utf-8")
 
 
+def _markdown_section(text: str, heading: str) -> str:
+    start = text.find(heading)
+    assert start != -1, f"missing markdown section: {heading}"
+    next_heading = text.find("\n## ", start + len(heading))
+    if next_heading == -1:
+        return text[start:]
+    return text[start:next_heading]
+
+
 def _documented_rule_ids() -> set[str]:
     return set(_RULE_ID_PATTERN.findall(_document_text()))
 
@@ -226,10 +235,10 @@ def test_inventory_tables_include_other_standards_column() -> None:
 
 def test_standards_roadmap_records_mapping_health_snapshot() -> None:
     text = (_REPO_ROOT / "docs" / "standards-roadmap.md").read_text(encoding="utf-8")
-    assert "## Mapping Health Check (2026-06-05)" in text
-    assert "`v0.1.0`" in text
-    assert "`docs/rule-coverage.md`" in text
-    assert "`docs/benchmarks-covering.md`" in text
-    assert "`tests/test_rule_coverage_doc.py`" in text
-    assert "`STD-GAP-015`" in text
-    assert "documentation-only" in text
+    section = _markdown_section(text, "## Mapping Health Check (2026-06-05)")
+    assert "`v0.1.0`" in section
+    assert "`docs/rule-coverage.md`" in section
+    assert "`docs/benchmarks-covering.md`" in section
+    assert "`tests/test_rule_coverage_doc.py`" in section
+    assert "`STD-GAP-015`" in section
+    assert "documentation-only" in section.lower()
