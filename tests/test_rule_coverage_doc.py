@@ -222,3 +222,14 @@ def test_inventory_tables_include_other_standards_column() -> None:
     headers = re.findall(r"^\| Rule ID \| Severity \| Input \| Tags \| .* \|$", _document_text(), re.MULTILINE)
     assert headers
     assert all("Standards (other)" in header for header in headers)
+
+
+def test_standards_roadmap_records_mapping_health_snapshot() -> None:
+    text = (_REPO_ROOT / "docs" / "standards-roadmap.md").read_text(encoding="utf-8")
+    assert "## Mapping Health Check (2026-06-05)" in text
+    assert "`v0.1.0`" in text
+    assert "`docs/rule-coverage.md`" in text
+    assert "`docs/benchmarks-covering.md`" in text
+    assert "`tests/test_rule_coverage_doc.py`" in text
+    assert "`STD-GAP-015`" in text
+    assert "documentation-only" in text
